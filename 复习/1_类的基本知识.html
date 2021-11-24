@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>1_类的基本知识</title>
+  </head>
+  <body>
+    <script>
+      //创建person类
+      class Person{
+        //构造器方法
+        constructor(name,age){
+          //构造器中的this指向？——类的实例对象
+          this.name = name
+          this.age = age
+        }
+        speak(){
+          //speak放在了哪里？——类的原型对象上，共实例使用
+          //this指向——(看通过什么方式调用)通过Person实例调用speak时,speak中的this就是Person实例;若使用.call这类的改变了this指向，this指向传递的参数
+          console.log(`我叫${this.name}`,`${this.age}岁`)
+        }
+      }
+      //创建Person实例对象
+      // const p1 = new Person('tom',19)
+      // const p2 = new Person('jerry',20)
+      // console.log(p1)
+      // console.log(p2)
+      // p1.speak()
+      // p2.speak()
+
+      //创建student类继承Person类
+      class student extends Person{
+        constructor(name,age,grade){
+          super(name,age)
+          this.grade = grade
+        }
+        //重写从父类继承来的方法speak
+        speak(){
+          console.log(`我叫${this.name}`,`${this.age}岁`,`${this.grade}了`)
+        }
+        study(){
+          console.log('我在学校')
+        }
+      }
+      const s1 = new student('小红',12,'五年级')
+      console.log(s1)
+      s1.speak()
+      s1.study()
+
+      /*
+        总结：
+          1.类中的构造器不是必须要写的，要对实例进行一些初始化操作，如添加指定的属性时才写
+          2.如果A类继承了B类，且A类中写了构造器，那么A类构造器中的super是必须要写的
+          3.类中所定义的方法，都是放在了类的原型对象上，共实例使用
+      */
+    </script>
+  </body>
+</html>

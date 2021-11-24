@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>5_函数式组件使用props</title>
+  </head>
+  <body>
+      <div id="test1"></div>
+      <div id="test2"></div>
+      <div id="test3"></div>
+     <!-- 引入react核心库 -->
+     <script src="../js/react.development.js"></script>
+     <!-- 引入react-dom 用于支持react操作dom -->
+     <script src="../js/react-dom.development.js"></script>
+     <!-- 引入babel，用于将jsx转为js -->
+     <script src="../js/babel.min.js"></script>
+     <!-- 引入types进行props限制 -->
+     <script src="../js/prop-types.js"></script>
+    <script type="text/babel">
+     function Person(props){
+       const {name, age, sex} = props //解构赋值
+       return (
+        <ul>
+          <li>姓名：{name}</li>
+          <li>性别：{sex}</li>
+          <li>年龄：{age}</li>
+        </ul>
+       )
+     }
+     //对标签属性进行类型、必要性进行限制
+     Person.propTypes = {
+        name:PropTypes.string.isRequired,// 限制name必传并为字符串            //React.ProtoTypes.string 15版本，现已经弃用
+        sex:PropTypes.string,
+        age:PropTypes.number
+        // speack:PropTypes.func //限制为函数
+      }
+      //指定默认标签属性值
+     Person.defaultProps = {
+       sex:'不男不女'
+     }
+     //2.渲染组件到页面
+     ReactDOM.render(<Person name="tom" age={19} sex="女"/>, document.getElementById('test1'))
+    </script>
+  </body>
+</html>

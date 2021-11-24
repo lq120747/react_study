@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>2_类中this的指向</title>
+    
+  </head>
+  <body>
+    <script>
+      class Person{
+        constructor(name,age){
+          this.name = name
+          this.age = age
+        }
+        study(){
+           //speak放在了哪里？——类的原型对象上，共实例使用
+          //this指向——(看通过什么方式调用)通过Person实例调用speak时,speak中的this就是Person实例;若使用.call这类的改变了this指向，this指向传递的参数
+          console.log(this)
+        }
+      }
+      const p1 = new Person('tom',18)
+      p1.study() //通过实例调用study发法
+      const x = p1.study
+      x() //直接调用 this指向window，但由于类中方法在局部开启了严格模式，因此为undefined
+    </script>
+  </body>
+</html>
